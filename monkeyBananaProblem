@@ -1,0 +1,57 @@
+public class monkeyislandproblem { 
+
+    public static integer getMaxbanana(Integer [][] banana ,integer m, integer n) 
+    
+    { 
+    integer res =0;
+             try{
+             
+                m=3;
+                n=3;
+                
+                List<List<Integer>> bananamatrx = new List<List<Integer>>{
+                new List<Integer>{0, 0, 0},
+                new List<Integer>{0, 0, 0},
+                new List<Integer>{0, 0, 0}
+            };
+                
+                
+                for (integer col = n-1; col >= 0; col--) 
+                { 
+                    for (integer row = 0; row < m; row++) 
+                    { 
+                        integer right = (col == n-1) ? 0 : bananamatrx[row][col+1]; 
+      
+                
+                        integer right_up = (row == 0 || col == n-1) ? 0 : bananamatrx[row-1][col+1]; 
+              
+                        
+                        integer right_down = (row == m-1 || col == n-1) ? 0 : bananamatrx[row+1][col+1]; 
+                        
+                        
+                        system.debug('up-->'+right_up);
+                        system.debug('down-->'+right_down);
+                        system.debug('bananrowcol-->'+banana[row][col]);              
+                        
+                        bananamatrx[row][col] = banana[row][col] + Math.max(right, Math.max(right_up,  right_down)); 
+                                                                 
+                    } 
+                } 
+              
+                
+                res = bananamatrx[0][0]; 
+                  
+                for (integer i = 1; i < m; i++) 
+                    res = Math.max(res, bananamatrx[i][0]); 
+                    system.debug('-->'+res);
+                    
+                }
+                catch(Exception e){
+                    system.debug('--->'+e.getLinenumber()+' --> '+e.getMessage());
+                }
+                      
+                return res; 
+
+         
+    } 
+}
